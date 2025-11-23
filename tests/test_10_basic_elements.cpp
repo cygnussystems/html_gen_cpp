@@ -200,3 +200,54 @@ TEST_CASE("10130: Style and anchor elements", "[elements][basic][style]") {
         CHECK(html.find("body { margin: 0; }") != std::string::npos);
     }
 }
+
+TEST_CASE("10140: Variadic constructors", "[elements][basic][variadic]") {
+    SECTION("div with multiple children") {
+        auto d = html::div(h1("Title"), p("Paragraph"), span("Text"));
+        std::string html = d.html_string();
+        CHECK(html.find("<div>") != std::string::npos);
+        CHECK(html.find("<h1>Title</h1>") != std::string::npos);
+        CHECK(html.find("<p>Paragraph</p>") != std::string::npos);
+        CHECK(html.find("<span>Text</span>") != std::string::npos);
+    }
+    SECTION("nested variadic constructors") {
+        auto d = html::div(
+            h1("Title"),
+            ul(li("Item 1"), li("Item 2"), li("Item 3"))
+        );
+        std::string html = d.html_string();
+        CHECK(html.find("<h1>Title</h1>") != std::string::npos);
+        CHECK(html.find("<ul>") != std::string::npos);
+        CHECK(html.find("<li>Item 1</li>") != std::string::npos);
+        CHECK(html.find("<li>Item 2</li>") != std::string::npos);
+        CHECK(html.find("<li>Item 3</li>") != std::string::npos);
+    }
+    SECTION("table with variadic constructors") {
+        auto t = table(
+            tr(th("Name"), th("Age")),
+            tr(td("Alice"), td("28")),
+            tr(td("Bob"), td("35"))
+        );
+        std::string html = t.html_string();
+        CHECK(html.find("<table>") != std::string::npos);
+        CHECK(html.find("Name") != std::string::npos);
+        CHECK(html.find("Alice") != std::string::npos);
+        CHECK(html.find("<tr>") != std::string::npos);
+    }
+    SECTION("semantic elements with variadic") {
+        auto h = header(
+            h1("Site Title"),
+            nav(anchor("#", "Home"), anchor("/about", "About"))
+        );
+        std::string html = h.html_string();
+        CHECK(html.find("<header>") != std::string::npos);
+        CHECK(html.find("<h1>Site Title</h1>") != std::string::npos);
+        CHECK(html.find("<nav>") != std::string::npos);
+    }
+    SECTION("chaining with variadic") {
+        auto d = html::div(p("Para 1"), p("Para 2")).cl("container").id("main");
+        std::string html = d.html_string();
+        CHECK(html.find("class=\"container\"") != std::string::npos);
+        CHECK(html.find("id=\"main\"") != std::string::npos);
+    }
+}

@@ -52,6 +52,14 @@ namespace html {
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
             }
+            // Variadic constructor for multiple children (td/th)
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            tr(Args&&... args) {
+                m_type = tr_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
             virtual ~tr() { ; }
 
             virtual element* make_copy()const override {
@@ -136,6 +144,14 @@ namespace html {
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
             }
+            // Variadic constructor for multiple children (tr)
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            tbody(Args&&... args) {
+                m_type = tbody_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
             virtual ~tbody() { ; }
 
             virtual element* make_copy()const override {
@@ -154,6 +170,14 @@ namespace html {
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
             }
+            // Variadic constructor for multiple children (tr)
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            thead(Args&&... args) {
+                m_type = thead_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
             virtual ~thead() { ; }
 
             virtual element* make_copy()const override {
@@ -171,6 +195,14 @@ namespace html {
                 m_type = tfoot_t;
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
+            }
+            // Variadic constructor for multiple children (tr)
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            tfoot(Args&&... args) {
+                m_type = tfoot_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
             }
             virtual ~tfoot() { ; }
 
@@ -210,6 +242,14 @@ namespace html {
                 element::m_type = table_t;
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
+            }
+            // Variadic constructor for multiple children (tr)
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            table(Args&&... args) {
+                element::m_type = table_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
             }
             virtual ~table() { ; }
           public:

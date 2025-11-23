@@ -206,6 +206,22 @@ namespace html {
             bool empty()const;
             size_t size()const;
           protected:
+            // Variadic constructor helpers
+            template<typename T>
+            void add_child_item(T&& item) {
+                if constexpr (std::is_convertible_v<std::decay_t<T>, std::string_view>) {
+                    add(text(std::string(std::forward<T>(item))));
+                } else {
+                    add(std::forward<T>(item));
+                }
+            }
+
+            template<typename... Args>
+            void add_children(Args&&... args) {
+                (add_child_item(std::forward<Args>(args)), ...);
+            }
+
+          protected:
             void write_elements(std::ostream&);
             void write_attributes(std::ostream&)const;
           public:

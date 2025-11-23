@@ -33,6 +33,14 @@ namespace html {
                 m_newline_after_element = true;
                 add(std::move(_e));
             }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 1)>>
+            div(Args&&... args) {
+                element::m_type = div_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
             virtual ~div() { ; }
             virtual element* make_copy()const override {
                 div* ptr = new div();
@@ -57,6 +65,14 @@ namespace html {
                 m_newline_after_element = true;
                 element::m_type = nav_t;
                 add(_e);
+            }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 1)>>
+            nav(Args&&... args) {
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                element::m_type = nav_t;
+                add_children(std::forward<Args>(args)...);
             }
             virtual ~nav() { ; }
             virtual element* make_copy()const override {
@@ -211,6 +227,12 @@ namespace html {
                 element::m_type = p_t;
                 add(std::move(_e));
             }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 1)>>
+            p(Args&&... args) {
+                element::m_type = p_t;
+                add_children(std::forward<Args>(args)...);
+            }
             virtual ~p() { ; }
             virtual element* make_copy()const override {
                 p* ptr = new html::p();
@@ -329,6 +351,14 @@ namespace html {
                 m_newline_after_tag = true;
                 m_newline_after_element = true;
             }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            ul(Args&&... args) {
+                element::m_type = ul_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
 
             virtual ~ul() { ; }
             virtual element* make_copy()const override {
@@ -343,6 +373,14 @@ namespace html {
         class ol : public element {
           public:
             ol() { element::m_type = ol_t; m_newline_after_tag = true; m_newline_after_element = true; }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 0)>>
+            ol(Args&&... args) {
+                element::m_type = ol_t;
+                m_newline_after_tag = true;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
+            }
 
             virtual ~ol() { ; }
             virtual element* make_copy()const override {
@@ -371,6 +409,13 @@ namespace html {
                 element::m_type = li_t;
                 m_newline_after_element = true;
                 add(std::move(_e));
+            }
+            // Variadic constructor for multiple children
+            template<typename... Args, typename = std::enable_if_t<(sizeof...(Args) > 1)>>
+            li(Args&&... args) {
+                element::m_type = li_t;
+                m_newline_after_element = true;
+                add_children(std::forward<Args>(args)...);
             }
             virtual ~li() { ; }
             virtual element* make_copy()const override {
