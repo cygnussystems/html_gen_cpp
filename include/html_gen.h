@@ -8,6 +8,12 @@
 #ifndef HTML_GEN__INCLUDED
 #define HTML_GEN__INCLUDED
 
+// Version information
+#define HTML_GEN_VERSION_MAJOR 1
+#define HTML_GEN_VERSION_MINOR 0
+#define HTML_GEN_VERSION_PATCH 0
+#define HTML_GEN_VERSION_STRING "1.0.0"
+
 // Core includes - order matters for dependencies
 #include "html_forward.h"
 #include "html_core.h"
