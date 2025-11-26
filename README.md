@@ -2,7 +2,7 @@
 
 **HTML generation that feels like React, but it's pure C++20.**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cygnussystems/html_gen_cpp)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cygnussystems/htmlgen-cpp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
 [![Header-only friendly](https://img.shields.io/badge/Headers-Included-green.svg)](#installation)
@@ -887,8 +887,8 @@ element modal(const std::string& id, const std::string& title, element& content)
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/html_gen_cpp.git
-cd html_gen_cpp
+git clone https://github.com/cygnussystems/htmlgen-cpp.git
+cd htmlgen-cpp
 
 # Create build directory
 mkdir build && cd build
