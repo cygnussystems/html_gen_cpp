@@ -27,4 +27,9 @@
 #include "html_interactive.h"
 #include "html_misc.h"
 
+// Namespace alias to allow htmlgen::html:: prefix
+namespace htmlgen {
+    namespace html = ::html;
+}
+
 #endif

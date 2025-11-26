@@ -181,6 +181,26 @@ add_subdirectory(html_gen_cpp)
 target_link_libraries(your_target PRIVATE html_gen_cpp)
 ```
 
+### Namespace Options
+
+The library uses the `html`, `chart`, and `resources` namespaces directly. For projects that need to avoid conflicts, namespace aliases are provided:
+
+```cpp
+// Standard usage (recommended)
+using namespace html;
+page pg;
+
+// Alternative: use htmlgen:: prefix to avoid conflicts
+htmlgen::html::page pg;
+htmlgen::html::div d;
+htmlgen::chart::line_chart chart;
+htmlgen::resources::bootstrap_css_string();
+
+// Or import just what you need
+using htmlgen::html::page;
+using htmlgen::html::div;
+```
+
 ---
 
 ## Feature Showcase

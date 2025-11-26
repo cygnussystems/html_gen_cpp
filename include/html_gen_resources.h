@@ -45,4 +45,9 @@ namespace resources {
 
 } // namespace resources
 
+// Namespace alias to allow htmlgen::resources:: prefix
+namespace htmlgen {
+    namespace resources = ::resources;
+}
+
 #endif

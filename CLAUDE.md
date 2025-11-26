@@ -93,8 +93,8 @@ build\tests\Debug\test_html_tags.exe "[element]"
 ### Basic Page
 
 ```cpp
-#include "html_tags.h"
-using namespace html;
+#include "html_gen.h"
+using namespace html;  // or htmlgen::html:: for explicit prefix
 
 page pg;
 pg.head << title("My Page");

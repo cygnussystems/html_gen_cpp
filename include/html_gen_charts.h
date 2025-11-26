@@ -65,4 +65,9 @@ namespace chart {
 
 }
 
+// Namespace alias to allow htmlgen::chart:: prefix
+namespace htmlgen {
+    namespace chart = ::chart;
+}
+
 #endif
