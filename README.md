@@ -2,10 +2,12 @@
 
 **HTML generation that feels like React, but it's pure C++20.**
 
+> **Note:** The repository is named `htmlgen-cpp` because GitHub doesn't allow `++` in repository names.
+
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/cygnussystems/htmlgen-cpp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![C++20](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
-[![Header-only friendly](https://img.shields.io/badge/Headers-Included-green.svg)](#installation)
+[![CMake Ready](https://img.shields.io/badge/Integration-CMake%20Ready-green.svg)](#installation)
 
 A modern C++20 library for generating HTML programmatically using a fluent, type-safe API. No more string concatenation nightmares, no more unclosed tags, no more runtime HTML errors.
 
@@ -108,6 +110,19 @@ pg.require(dependency::bootstrap_js);
 ### Flexible
 
 Use stream operators for dynamic construction, variadic constructors for declarative style, or mix both seamlessly.
+
+---
+
+## Use Cases
+
+HtmlGen++ is designed for:
+
+- **Report Generation** - Create HTML reports from C++ applications
+- **Email Templates** - Generate HTML emails programmatically
+- **Static Site Generation** - Build static HTML pages from data
+- **Server-Side Rendering** - Generate HTML responses in C++ web servers
+- **Documentation** - Create HTML documentation from code
+- **Data Visualization** - Combine with charts for dashboards
 
 ---
 
@@ -788,6 +803,13 @@ time_chart.m_id = "time_chart";
 // ... configure with timestamps
 ```
 
+### Thread Safety
+
+- Each thread can have its own `page` context (uses `thread_local` storage)
+- Individual elements are **not** thread-safe for concurrent modification
+- Build elements on separate threads, then combine on a single thread
+- The `page` object should not be shared across threads
+
 ### HTML Escaping
 
 Automatically escape user input to prevent XSS:
@@ -944,11 +966,21 @@ find_package(html_gen_cpp REQUIRED)
 target_link_libraries(your_target PRIVATE html_gen_cpp::html_gen_cpp)
 ```
 
-**Option 3: Header-only usage**
+**Option 3: Header-only usage (CDN mode)**
+
+> **Note:** HtmlGen++ includes source files for embedded Bootstrap/ApexCharts resources.
+> For header-only usage without embedded resources, include only the header files and
+> use CDN mode for external dependencies.
 
 Copy the `include/` directory to your project and add to include path:
 ```cmake
-target_include_directories(your_target PRIVATE path/to/html_gen_cpp/include)
+target_include_directories(your_target PRIVATE path/to/htmlgen-cpp/include)
+```
+
+Then use CDN mode instead of embedded resources:
+```cpp
+pg.require(dependency::bootstrap_css);  // Uses CDN links
+pg.require(dependency::bootstrap_js);
 ```
 
 ---
